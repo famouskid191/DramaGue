@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+---
+
+<Layout title="Disclaimer - Drama Gue">
+  <Navbar client:load />
+  <main class="flex-grow max-w-4xl mx-auto px-4 py-12 w-full">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Penyangkalan</h1>
+    <div class="prose dark:prose-invert max-w-none space-y-4 text-gray-600 dark:text-gray-400">
+      <p>Arsitektur Drama Gue beroperasi secara eksklusif sebagai mesin pembaca anotasi tautan eksternal yang mengeksekusi konversi lokasi pemutaran. Kami sama sekali tidak memiliki, mengunggah, atau berafiliasi dengan materi hak cipta yang direpresentasikan di dalam perpustakaan pencarian visual ini.</p>
+      <p>Seluruh materi dialirkan dari pusat data publik independen. Semua keluhan pelanggaran kekayaan intelektual sangat disarankan untuk disalurkan secara langsung melalui panel pelaporan resmi pada situs inang orisinal tempat penyiaran konten tersebut disimpan pertama kalinya.</p>
+    </div>
+  </main>
+  <Footer />
+</Layout>

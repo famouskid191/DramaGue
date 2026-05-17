@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+---
+
+<Layout title="Privacy Policy - Drama Gue">
+  <Navbar client:load />
+  <main class="flex-grow max-w-4xl mx-auto px-4 py-12 w-full">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Kebijakan Privasi</h1>
+    <div class="prose dark:prose-invert max-w-none space-y-4 text-gray-600 dark:text-gray-400">
+      <p>Di Drama Gue, kerahasiaan identitas navigasi Anda dilindungi melalui mekanisme isolasi sesi. Data operasional sekunder hanya direkam ketika sistem perlu memantau alokasi bandwidth menuju perangkat penampil.</p>
+      <p>Saluran komunikasi eksternal dipelihara untuk menunjang antarmuka pemutaran video secara murni. Proses pengiriman perintah integrasi tidak mendistribusikan profil penggunaan Anda kepada pelacak analitik dari entitas penyedia sumber video asli tersebut.</p>
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+import { pwaInfo } from 'virtual:pwa-info';
+import InstallPrompt from '../components/InstallPrompt.jsx';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  url?: string;
+}
+
+const svgOgImage = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%230f0f0f'/%3E%3Cpath fill='%23dc2626' d='M470 216a130 130 0 1 1 260 0 130 130 0 1 1-260 0zM565 161c-4 2-6 6-6 11v100c0 5 2 9 6 11s9 2 12-1l73-45c4-2 6-6 6-11s-2-9-6-11l-73-45c-3-2-8-2-12 1z'/%3E%3Ctext x='600' y='480' fill='white' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle'%3EDRAMA GUE%3C/text%3E%3C/svg%3E";
+
+const { 
+  title, 
+  description = "Drama Gue - Platform streaming video hiburan, aksi, dan drama terbaik dengan kualitas tinggi.",
+  image = svgOgImage,
+  url = Astro.url.href
+} = Astro.props;
+
+const svgIcon = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23dc2626' d='M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z'/%3E%3C/svg%3E";
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#dc2626" />
+    <title>{title}</title>
+    
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="video.other" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <link rel="icon" href={svgIcon} type="image/svg+xml">
+    <link rel="apple-touch-icon" href={svgIcon}>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" type="text/css" />
+    <script is:inline src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+    <script is:inline>
+      document.addEventListener('keydown', (e) => {
+        if (
+          e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+          (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+          (e.ctrlKey && e.key === 'U') ||
+          (e.ctrlKey && e.shiftKey && e.key === 'C')
+        ) {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </head>
+  <body class="bg-gray-50 text-gray-800 dark:bg-[#0f0f0f] dark:text-gray-200 font-sans antialiased min-h-screen flex flex-col transition-colors duration-300">
+    <div id="google_translate_element"></div>
+    <slot />
+    <InstallPrompt client:load />
+    
+    <script is:inline type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'id', autoDisplay: false}, 'google_translate_element');
+      }
+    </script>
+    <script is:inline type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.jsx';
+import VideoHome from '../components/VideoHome.jsx';
+import Footer from '../components/Footer.jsx';
+---
+
+<Layout title="Drama Gue - Enterprise Streaming">
+  <Navbar client:load />
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <VideoHome client:load />
+  </main>
+  <Footer />
+</Layout>
